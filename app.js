@@ -2,7 +2,7 @@ const express = require('express'),
 	path = require('path'),
 	bodyParser = require('body-parser'),
 	mysql = require('mysql'),
-	pool = mysql.createPool({     //创建一个pool
+	connection = mysql.createConnection({     //创建一个connection
 		host     : '127.0.0.1',       //主机
 		user     : 'root',               //MySQL认证用户名
 		password : 'root',        //MySQL认证用户密码
