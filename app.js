@@ -1,20 +1,20 @@
-const  express = require('express'),
-            path = require('path'),
-            bodyParser = require('body-parser'),
-            mysql = require('mysql'),
-            connection = mysql.createConnection({     //创建一个connection
-	host     : '127.0.0.1',       //主机
-	user     : 'root',               //MySQL认证用户名
-	password : 'root',        //MySQL认证用户密码
-	port: '3306',                   //端口号
-	database:'test'
-	}); 
-            port=process.env.PORT || 3000,
-            app = express();
+const express = require('express'),
+	path = require('path'),
+	bodyParser = require('body-parser'),
+	mysql = require('mysql'),
+	pool = mysql.createPool({     //创建一个pool
+		host     : '127.0.0.1',       //主机
+		user     : 'root',               //MySQL认证用户名
+		password : 'root',        //MySQL认证用户密码
+		port: '3306',                   //端口号
+		database:'test'
+		}); 
+	port=process.env.PORT || 3000,
+	app = express();
 
-app.set('views','./views');
+app.set('views','./app/views');
 app.set('view engine','ejs');
-app.use(express.static(path.join(__dirname,'bower_components')));
+app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.urlencoded({extended:true}));
 
 
@@ -29,23 +29,17 @@ connection.connect(function(err){
 //执行SQL语句
 
 
-var users;
-connection.query('select * from users', function(err, result) { 
-			     if (err) {
-			             console.log('[ query error] - ',err.message);
-			        return;
-			     }
-			     users=result;
-			     console.log(users) ;
-			});  
 //index page
 app.get('/',function( req , res ) {
-	
-	console.log("users"+users);
-	res.render('index',{
+        connection.query("select * from users",function(err,result){
+                 if(!err) {
+                    res.render('index',{
 		title : 'index',
-		users : users
+		users : result
 	})
+                 }
+            });
+	
 });
 
 //关闭connection

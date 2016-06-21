@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= title %></title>
+</head>
+<body>
+	<ul>  
+		<% users.forEach(function(use){ %>  
+		<ul>
+		  <li foo='<%= use + "'" %>'><%= use.name %>
+		  </li> 
+		    <li foo='<%= use + "'" %>'><%= use.age %>
+		  </li> 
+		  </ul>  
+
+		<% }) %>  
+	</ul>  
+</body>
+</html>
