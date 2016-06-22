@@ -23,13 +23,14 @@ app.use(bodyParser.urlencoded({extended:true}));
 //执行SQL语句
 
 
-//index page
+//用户列表
 app.get('/',function( req , res ) {
 	pool.getConnection(function(err, connection) {
         connection.query("select * from users",function(err,result){
+        	console.log(result);
                  if(!err) {
-                    res.render('index',{
-		title : 'index',
+                    res.render('pages/user',{
+		title : 'user',
 		users : result
 	})
                  }
@@ -38,13 +39,23 @@ app.get('/',function( req , res ) {
 	
 });
 
+//新增
+app.get('/create', function(req, res) {
+ res.render('pages/create', {
+ title : '增加新用户',
+ user : ''
+ });
+});
+
 app.post('/create', function(req, res) {
+	console.log(req.body);
  pool.getConnection(function(err, connection) {
  connection.query('insert into users set ?', {
- id : req.body.user.id,
- login_name : req.body.user.login_name,
- name : req.body.user.name,
- password : req.body.user.password
+login_name : req.body.login_name,
+password : req.body.password,
+ name : req.body.name,
+ team : req.body.team,
+ job: req.body.job
  }, function(err, fields) {
  if (err)
  throw err;
@@ -65,7 +76,7 @@ app.get('/update/:id', function(req, res) {
  if (err)
  throw err;
  console.log('search is success.');
- res.render('index', {
+ res.render('pages/create', {
  title : 'Update user',
  user: rows[0]
  });
@@ -76,11 +87,12 @@ app.get('/update/:id', function(req, res) {
 app.post('/update', function(req, res) {
  pool.getConnection(function(err, connection) {
  connection.query('update users set ? where id = ?', [{
- id : req.body.user.id,
- login_name : req.body.user.login_name,
- name : req.body.user.name,
- password : req.body.user.password
- },req.body.user.id], function(err, fields) {
+ login_name : req.body.login_name,
+password : req.body.password,
+ name : req.body.name,
+ team : req.body.team,
+ job: req.body.job
+ },req.body.id], function(err, fields) {
  if (err)
  throw err;
  //console.log('Insert is success.');

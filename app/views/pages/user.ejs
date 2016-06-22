@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= title %></title>
+	 <%- include ../include/head%>
+</head>
+<body>
+	
+	<table class="table table-bordered">
+	<thead>
+	<th class="col-md-2">登录名</th>
+	<th class="col-md-2">密码</th>
+	<th class="col-md-2">姓名</th>
+	<th class="col-md-2">团队</th>
+	<th class="col-md-2">职位</th>
+	<th class="col-md-2">操作</th>
+	</thead>
+	<tbody >
+	<% users.forEach(function(user){ %>  
+	<tr >
+	<td class="col-md-2"><%= user.login_name %></td>
+	<td class="col-md-2"><%= user.password %></td>
+	<td class="col-md-2"><%= user.name %></td>
+	<td class="col-md-2"><%= user.team %></td>
+	<td class="col-md-2"><%= user.job %></td>
+	<td class="col-md-2"><a href='/delete/<%= user.id %>'  class='btn btn-primary'>删除</a><a href='/update/<%= user.id %>'  class='btn btn-primary'>修改</a></td>
+	</tr> 
+	<% }) %>  
+	</tbody>
+	</table>
+ 	<a href='/create'  class='btn btn-primary'>增加帐号</a>
+	
+</body>
+</html>
