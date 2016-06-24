@@ -1,0 +1,30 @@
+{
+  "name": "weekly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/www",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.4.2",
+    "express": "^4.14.0",
+    "mysql": "^2.11.1",
+    "path": "^0.12.7",
+    "redis": "^2.6.2",
+    "sails-mysql": "^0.11.5",
+    "waterline": "^0.12.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haoliqiang/weekly.git"
+  },
+  "author": "plot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haoliqiang/weekly/issues"
+  },
+  "homepage": "https://github.com/haoliqiang/weekly#readme"
+}

@@ -34,34 +34,37 @@ var getUsersFromMysql = function(req, id, cb){
 };
 
 module.exports = {
-	findOne: function(req, res, next) {
-		console.log(req.params.id);
-		if(!req.params.id){
-			return next(new Error('params error'));
+	  // 处理路由参数
+	  getById: function(req, res, next, id){
+	    if(!id){
+	     return next(new Error('user not Found'));
+		 }
+	    getUsersFromRedis(id, function(err, doc){
+	      if(err) {
+	      	return next(err);
 		}
-		getUsersFromRedis(req.params.id, function(err, doc){
-		      if(err){ return next(err);}
-
-		      if(!doc) {
-		        getUsersFromMysql(req,req.params.id, function(err, doc){
-		          if(err){ return next(err);}
-
-		          if(!doc) {
-		            return next(new Error('News not Found'));
-		          }
-		          return res.render('pages/create', {
-					 title : 'Update user',
-					 user: doc
-					 });
-		        })
-		      } else {
-		       
-		        return res.render('pages/create', {
-					 title : 'Update user',
-					 user: doc
-					 });
-		      }
-		    })
+	      if(!doc) {
+	        getUsersFromMysql(req,id, function(err, doc){
+	          if(err) {
+	          	return next(err);
+		}
+	          if(!doc) {
+	            return next(new Error('user not Found'));
+	          }
+	          req.user = doc;
+	          return next();
+	        })
+	      } else {
+	        req.user = doc;
+	        return next();
+	      }
+	    })
+	  },
+	findOne: function(req, res, next) {
+	          return res.render('pages/create', {
+				 title : 'Update user',
+				 user: req.user 
+				 });
 		
 	},
 
