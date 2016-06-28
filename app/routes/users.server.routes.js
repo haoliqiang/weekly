@@ -2,17 +2,11 @@ var UsersController = require('../controllers/users.server.controller');
 
 module.exports = function(app){
 
-app.route('/')
+app.route('/list')
        .get( UsersController.find);
    
   
 app.route('/create')
-       .get( function(req, res) {             //新增
-	 res.render('pages/create', {
-	 title : '增加新用户',
-	 user : ''
-	 });
-	})
        .post( UsersController.create); //新建操作
 
 //打开指定id的数据

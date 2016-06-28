@@ -1,27 +1,59 @@
-angular.module('usersModule')
+angular.module('clientModule')
   .controller('UsersController', ['$scope', 'UsersService', UsersController]);
 
-function UsersController($scope, NewsService){
-  $scope.list = [];
-  $scope.current = {};
-  $scope.new = {};
+function UsersController($scope, UsersService){
+  $scope.users = [];
+  $scope.user = {};
+  $scope.status =true;
 
   $scope.save = function(){
-    if(!$scope.new.title) {
-      $scope.editorMessage = 'Title is required';
+    $scope.verify();
+
+    UsersService.save($scope.user).then(
+      function(data){
+         $("#modal-editor").hide();
+        $scope.loadNews();
+      },
+      function(err){
+        $scope.editorMessage = err;
+      }
+    );
+  };
+   $scope.verify = function(){
+   if(!$scope.user.login_name) {
+      $scope.editorMessage = 'login_name is required';
       return;
     }
 
-    if(!$scope.new.content) {
-      $scope.editorMessage = 'Content is required';
+    if(!$scope.user.password) {
+      $scope.editorMessage = 'password is required';
+      return;
+    }
+
+if(!$scope.user.name) {
+      $scope.editorMessage = 'name is required';
+      return;
+    }
+
+    if(!$scope.user.team) {
+      $scope.editorMessage = 'team is required';
+      return;
+    }
+
+    if(!$scope.user.job) {
+      $scope.editorMessage = 'job is required';
       return;
     }
 
     $scope.editorMessage = '';
+    };
 
-    NewsService.save($scope.new).then(
+  $scope.update = function(){
+ 
+  $scope.verify();
+    UsersService.update($scope.user).then(
       function(data){
-        $("#modal-editor").modal('hide')
+           $("#modal-editor").hide();
         $scope.loadNews();
       },
       function(err){
@@ -30,19 +62,33 @@ function UsersController($scope, NewsService){
     );
   };
 
-  $scope.createNews = function(){
-    $("#modal-editor").modal('show');
+
+  $scope.createUser = function(){
+    $("#modal-editor").show();
   };
 
-  $scope.openNewsDetail = function(id){
+  $scope.openUserDetail = function(id){
+      $scope.status =false;
     $scope.loadDetail(id);
-    $("#modal-detail").modal('show');
+    $scope.createUser();
+    
   };
 
   $scope.loadDetail = function(id){
-    NewsService.detail(id).then(
+    UsersService.detail(id).then(
       function(data){
-        $scope.current = data;
+        $scope.user = data;
+        console.log($scope.user);
+      },
+      function(err){}
+    );
+  };
+
+ $scope.delete = function(id){
+    UsersService.delete(id).then(
+      function(data){
+        console.log(data);
+         $scope.loadNews();
       },
       function(err){}
     );
@@ -52,10 +98,12 @@ function UsersController($scope, NewsService){
     return moment(time).format('l');
   };
 
+
+
   $scope.loadNews = function(){
-    NewsService.list().then(
+    UsersService.list().then(
       function(data){
-        $scope.list = data;
+        $scope.users = data;
       },
       function(err){}
     );

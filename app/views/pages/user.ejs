@@ -5,9 +5,9 @@
 	<title><%= title %></title>
 	 <%- include ../include/head%>
 </head>
-<body>
+<body ng-app="clientModule">
 	
-	<table class="table table-bordered">
+	<table class="table table-bordered" ng-controller="UsersController">
 	<thead>
 	<th class="col-md-2">登录名</th>
 	<th class="col-md-2">密码</th>
@@ -17,22 +17,22 @@
 	<th class="col-md-2">操作</th>
 	</thead>
 	<tbody >
-	<% users.forEach(function(user){ %>  
-	<tr >
-	<td class="col-md-2"><%= user.login_name %></td>
-	<td class="col-md-2"><%= user.password %></td>
-	<td class="col-md-2"><%= user.name %></td>
-	<td class="col-md-2"><%= user.team %></td>
-	<td class="col-md-2"><%= user.job %></td>
-	<td class="col-md-2"><a href='/delete/<%= user.id %>'  class='btn btn-primary'>删除</a><a href='/update/<%= user.id %>'  class='btn btn-primary'>修改</a></td>
+
+	<tr   ng-repeat="user in users">
+	<td class="col-md-2" ng-bind="user.login_name"></td>
+	<td class="col-md-2" ng-bind="user.password"></td>
+	<td class="col-md-2" ng-bind="user.name"></td>
+	<td class="col-md-2" ng-bind="user.team"></td>
+	<td class="col-md-2" ng-bind="user.job"></td>
+	<td class="col-md-2" ><a href='/delete/"+ {{user.id}}+" ' class='btn btn-primary'>删除</a><a href='/update/"+ {{user.id}}+" '  class='btn btn-primary'>修改</a></td>
 	</tr> 
-	<% }) %>  
+
 	</tbody>
 	</table>
  	<a href='/create'  class='btn btn-primary'>增加帐号</a>
 	
 
- <div class="modal fade" id="modal-editor">
+<!--  <div class="modal fade" id="modal-editor">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -106,6 +106,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </body>
 </html>

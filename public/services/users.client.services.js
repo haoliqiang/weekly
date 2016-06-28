@@ -1,4 +1,4 @@
-angular.module('usersModule')
+angular.module('clientModule')
   .service("UsersService", ["$http", "$q", UsersService]);
 
 
@@ -28,7 +28,7 @@ function UsersService($http, $q) {
   }
   return {
     list: function(params){
-      return handleRequest('GET', '/', params);
+      return handleRequest('GET', '/list', params);
     },
     save: function(data){
       return handleRequest('POST', '/create', data);
@@ -36,8 +36,11 @@ function UsersService($http, $q) {
     detail: function(id){
       return handleRequest('GET', '/update/' + id);
     },
-    update: function(id){
+    update: function(data){
       return handleRequest('POST', '/update', data);
+    },
+    delete:function(id){
+      return handleRequest('GET',  '/delete/' + id);
     }
   }
 }

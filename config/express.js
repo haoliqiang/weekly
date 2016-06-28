@@ -6,7 +6,8 @@ module.exports = function() {
 	console.log('init expesss...');
 	var  app = express();
 	app.use(express.static(path.join(__dirname,'../public')));
-	app.use(bodyParser.urlencoded({extended:true}));
+	app.use(bodyParser.urlencoded({extended:false}));
+        app.use(bodyParser.json());
 	app.set('views','./app/views');
 	app.set('view engine','ejs');
 	app.use(function(req,res, next) {

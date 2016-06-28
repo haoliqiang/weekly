@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= title %></title>
+	<link rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.css"   />
+	
+</head>
+<body ng-app="clientModule" ng-controller="UsersController">
+	
+	<table class="table table-bordered" >
+	<thead>
+	<th class="col-md-2">登录名</th>
+	<th class="col-md-2">密码</th>
+	<th class="col-md-2">姓名</th>
+	<th class="col-md-2">团队</th>
+	<th class="col-md-2">职位</th>
+	<th class="col-md-2">操作</th>
+	</thead>
+	<tbody >
+
+	<tr   ng-repeat="user in users">
+	<td class="col-md-2" ng-bind="user.login_name"></td>
+	<td class="col-md-2" ng-bind="user.password"></td>
+	<td class="col-md-2" ng-bind="user.name"></td>
+	<td class="col-md-2" ng-bind="user.team"></td>
+	<td class="col-md-2" ng-bind="user.job"></td>
+	<td class="col-md-2" ><button  class='btn btn-primary' ng-click="delete(user.id)">删除</button><button  class='btn btn-primary' ng-click="openUserDetail(user.id)">修改</button></td>
+	</tr> 
+
+	</tbody>
+	</table>
+ 	<button  class='btn btn-primary' ng-click="createUser()">增加帐号</button>
+	
+
+ <div class="modal" id="modal-editor">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1> Editor</h1>
+        </div>
+        <div class="modal-body">
+
+         <form  class="form-horizontal"  style="width: 1000px;    padding-left: 20px;" >
+		<input name='id' class='xlarge' ng-bind='user.id ' style="display:none">
+			<div class="form-group ">
+			 <div class="input-group col-sm-4">
+			 <div class="input-group-addon">登录名</div>
+			<input name='login_name' class='form-control' ng-model='user.login_name ' >
+			</div></div>
+			<div class="form-group">
+			 <div class="input-group col-sm-4">
+			 <div class="input-group-addon">密码</div>
+			<input name='password' class='form-control'  ng-model='user.password ' >
+			</div></div>
+			<div class="form-group">
+			 <div class="input-group col-sm-4">
+			 <div class="input-group-addon">姓名</div>
+			<input name='name' class='form-control' ng-model='user.name ' >
+			</div></div>
+			<div class="form-group">
+			 <div class="input-group col-sm-4">
+			 <div class="input-group-addon">团队</div>
+			<input name='team' class='form-control' ng-model='user.team '  >
+			</div></div>
+			<div class="form-group">
+			 <div class="input-group col-sm-4">
+			 <div class="input-group-addon">职位</div>
+			<input name='job' class='form-control' ng-model='user.job '  >
+			</div></div>
+			
+			   <button class="btn btn-primary" ng-click="save()" ng-show='status'>保存</button>
+			    <button class="btn btn-primary" ng-click="update()" ng-show='!status'>修改</button>
+			<button type='reset' class='btn'>取消</button>
+			 <span class="help-inline text-danger" ng-bind="editorMessage"></span>
+		</form>
+        </div>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="/libs/angular/angular.min.js"></script>
+<script type="text/javascript" src="/clientapp.js"></script>
+<script type="text/javascript" src="/services/users.client.services.js"></script> 
+<script type="text/javascript" src="/controllers/users.client.controller.js"></script> 
+</body>
+</html>

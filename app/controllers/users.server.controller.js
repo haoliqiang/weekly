@@ -61,10 +61,7 @@ module.exports = {
 	    })
 	  },
 	findOne: function(req, res, next) {
-	          return res.render('pages/create', {
-				 title : 'Update user',
-				 user: req.user 
-				 });
+	          return res.json(req.user);
 		
 	},
 
@@ -80,12 +77,12 @@ module.exports = {
 			if(err) {
 				return next(err);
 			}
-			return res.redirect('/');
+			 return res.json(doc);
 			});	
   
 	},
 	update: function(req, res, next) {
-		console.log(req.body);
+		
 		if(!req.body.login_name || !req.body.password
 		 || !req.body.name || !req.body.team
 		 || !req.body.job){
@@ -96,11 +93,11 @@ module.exports = {
 			if(err) {
 				return next(err);
 			}
-			console.log('doc'+req.body);
-			return res.redirect('/');
+			return res.json(doc);
 			});	
 	},
 	delete: function(req, res, next) {
+		console.log(1);
 		if(!req.params.id){
 			return next(new Error('params error'));
 		}
@@ -111,7 +108,7 @@ module.exports = {
 					return next(err);
 				}
 
-				return res.redirect('/');
+				 return res.json(doc);
 			});	
 	},
 	find: function(req, res, next) {
@@ -122,10 +119,8 @@ module.exports = {
 				if(err) {
 					return next(err);
 				}
-				return res.render('pages/user',{
-					title : 'user',
-					users : doc
-				});
+				//console.log(doc);
+				  return res.json(doc);
 		});
 			
 	}
