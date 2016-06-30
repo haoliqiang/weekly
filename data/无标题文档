@@ -1,0 +1,49 @@
+ var User = Waterline.Collection.extend({
+
+  identity: 'user',
+  connection: 'local-postgresql',
+
+  attributes: { 
+    name: 'string',
+    users: {
+      collection: 'userRole',
+      via: 'user_id',
+      dominant: true
+    }
+  }
+});
+
+ 
+var UserRole = Waterline.Collection.extend({
+
+  identity: 'userRole',
+  connection: 'local-postgresql',
+
+  attributes: {
+    id: 'int',
+    user_id: {
+      collection: 'user',
+      via: 'users'
+    }
+   role_id: {
+      collection: 'role',
+      via: 'roles'
+    }
+    
+  }
+});
+
+var Role = Waterline.Collection.extend({
+
+  identity: 'role',
+  connection: 'local-postgresql',
+
+  attributes: { 
+    name: 'string',
+    roles: {
+      collection: 'userRole',
+      via: 'role_id',
+      dominant: true
+    }
+  }
+});
