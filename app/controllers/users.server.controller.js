@@ -22,7 +22,9 @@ var getUsersFromRedis = function(id, cb){
 
 var getUsersFromMysql = function(req, id, cb){
 	console.log('run getUsersFromMysql');
-	req.models.users.findOne({id: id})
+	req.models.admin_user.findOne({id: id})
+	.populate('roles')
+	.populate('teams')
 	.exec(function(err, doc){
 	if(doc) {
 	
@@ -83,11 +85,11 @@ module.exports = {
 	},
 	update: function(req, res, next) {
 		
-		if(!req.body.login_name || !req.body.password
-		 || !req.body.name || !req.body.team
-		 || !req.body.job){
-			return next(new Error('params error'));
-		}
+		// if(!req.body.login_name || !req.body.password
+		//  || !req.body.name || !req.body.team
+		//  || !req.body.job){
+		// 	return next(new Error('params error'));
+		// }
 
 		req.models.admin_user.update({id: req.body.id},req.body,function(err,doc) {
 			if(err) {
@@ -112,7 +114,9 @@ module.exports = {
 			});	
 	},
 	find: function(req, res, next) {
-			req.models.admin_user.find().populate('roles')
+			req.models.admin_user.find()
+			.populate('roles')
+			.populate('teams')
 			.exec(function(err, doc){
 				
 				if(err) {
