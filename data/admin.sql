@@ -28,8 +28,8 @@ CREATE TABLE `admin_daily` (
   `daily_timeout` int(11) DEFAULT NULL COMMENT '日报时长(小时)',
   `daily_progress` int(11) DEFAULT NULL COMMENT '日报完成进度(%)',
   `create_user_id` bigint(20) NOT NULL COMMENT '创建用户ID',
-  `create_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `modify_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
+  `create_date` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '创建时间',
+  `modify_date` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `FK_admin_user_admin_daily` (`create_user_id`),
   CONSTRAINT `FK_admin_user_admin_daily` FOREIGN KEY (`create_user_id`) REFERENCES `admin_user` (`id`)
@@ -71,8 +71,8 @@ CREATE TABLE `admin_daily_report` (
   `daily_timeout` int(11) DEFAULT NULL COMMENT '日报时长(小时)',
   `daily_progress` int(11) DEFAULT NULL COMMENT '日报完成进度(%)',
   `create_user_id` bigint(20) NOT NULL COMMENT '创建用户ID',
-  `create_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `modify_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
+  `create_date` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '创建时间',
+  `modify_date` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `FK_admin_user_admin_daily_report` (`create_user_id`),
   CONSTRAINT `FK_admin_user_admin_daily_report` FOREIGN KEY (`create_user_id`) REFERENCES `admin_user` (`id`)
@@ -133,14 +133,14 @@ CREATE TABLE `admin_role` (
   `role_desc` varchar(255) DEFAULT NULL COMMENT '角色描述',
   `is_system` bit(1) NOT NULL COMMENT '是否是超级(0否1是)',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建日期',
-  `modify_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改日期',
+  `modify_date` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '修改日期',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色权限';
 
 -- ----------------------------
 -- Records of admin_role
 -- ----------------------------
-INSERT INTO `admin_role` VALUES ('1', '前端工程师', '1', '', '2016-06-30 14:01:40', '0000-00-00 00:00:00');
+INSERT INTO `admin_role` VALUES ('1', '前端工程师', '1', '', '2016-06-30 14:01:40', '2015-01-10 00:00:00');
 
 -- ----------------------------
 -- Table structure for admin_role_func
@@ -173,14 +173,14 @@ CREATE TABLE `admin_task` (
   `task_grade` int(11) NOT NULL COMMENT '任务等级(1,2,3,4,5)',
   `task_type` bigint(20) DEFAULT NULL COMMENT '任务类型(来源数据字典ID)',
   `task_start` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '任务开始时间',
-  `task_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '任务结束时间',
+  `task_end` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '任务结束时间',
   `task_date` int(11) DEFAULT NULL COMMENT '任务时长(小时)',
   `task_progress` int(11) DEFAULT '0' COMMENT '任务完成进度(%)',
   `is_enabled` int(1) NOT NULL DEFAULT '0' COMMENT '是否可用(0可用1不可用)',
   `current_user_id` bigint(20) DEFAULT NULL COMMENT '当前用户ID',
   `create_user_id` bigint(20) NOT NULL COMMENT '创建用户ID',
-  `create_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `modify_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
+  `create_date` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '创建时间',
+  `modify_date` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `FK_admin_user_admin_task` (`create_user_id`),
   CONSTRAINT `FK_admin_user_admin_task` FOREIGN KEY (`create_user_id`) REFERENCES `admin_user` (`id`)
@@ -200,7 +200,7 @@ CREATE TABLE `admin_task_item` (
   `task_item_name` varchar(50) DEFAULT NULL COMMENT '任务项名称',
   `task_item_file` varchar(100) DEFAULT NULL COMMENT '任务项文件路径',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
-  `modify_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
+  `modify_date` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `FK_admin_task_admin_task_item` (`admin_task_id`),
   CONSTRAINT `FK_admin_task_admin_task_item` FOREIGN KEY (`admin_task_id`) REFERENCES `admin_task` (`id`)
@@ -228,7 +228,7 @@ CREATE TABLE `admin_user` (
   `password` varchar(255) NOT NULL COMMENT '密码',
   `username` varchar(100) NOT NULL COMMENT '用户名',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建日期',
-  `modify_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改日期',
+  `modify_date` timestamp NOT NULL DEFAULT '2015-01-10 00:00:00' COMMENT '修改日期',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户';
@@ -236,7 +236,7 @@ CREATE TABLE `admin_user` (
 -- ----------------------------
 -- Records of admin_user
 -- ----------------------------
-INSERT INTO `admin_user` VALUES ('1', '1', '1', '1', '1', '1', null, null, '0', '1', '1', '1', '2016-06-30 14:01:18', '0000-00-00 00:00:00');
+INSERT INTO `admin_user` VALUES ('1', '1', '1', '1', '1', '1', null, null, '0', '1', '1', '1', '2016-06-30 14:01:18', '2015-01-10 00:00:00');
 
 -- ----------------------------
 -- Table structure for admin_user_dept

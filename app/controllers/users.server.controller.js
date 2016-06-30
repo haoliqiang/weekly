@@ -112,31 +112,17 @@ module.exports = {
 			});	
 	},
 	find: function(req, res, next) {
-			req.models.admin_user_role.find()
-			.populate('admin_role_id')
-			.populate('admin_user_id')
+			req.models.admin_user.find().populate('roles')
 			.exec(function(err, doc){
+				
 				if(err) {
 					return next(err);
 				}
+				
 				return res.json(doc);
 			});
-// 		req.models.admin_user.find().populate('role')
-// 			.sort({ id: 'desc' })
-// 			.exec(function(err, doc){
-// 				if(err) {
-// 					return next(err);
-// 				}
-// 				console.log(res.json(doc).models);
-// // 				req.models.admin_role.find({json(doc).role[0].admin_role_id}).exec(function(err, doc){
-// // 				if(err) {
-// // 					return next(err);
-// // 				}
-// // console.log(doc);
-// // 				});
-// 				//console.log(doc);
-// 				  //return res.json(doc);
-// 		});
+
+
 			
 	}
 	

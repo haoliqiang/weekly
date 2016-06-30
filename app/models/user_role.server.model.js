@@ -8,31 +8,28 @@ module.exports = Waterline.Collection.extend({
 	autoCreatedAt: false,
 	autoUpdatedAt: false,
 	attributes:{
-	   //            admin_role_id: {
-		  // collection: 'admin_role',
-    //   			via: 'roles'
+	              admin_role_id: {
+		  model: 'admin_role'
 		   
-		  // },
-		  // admin_user_id: {
-		  //   collection: 'admin_user',
-    //   			via: 'role'
-		
-		  // }
-
-		 admin_role_id: {
-		   columnName: 'admin_role_id',
-		    type: 'integer',
-		    foreignKey: true,
-		    references: 'admin_role',
-		    on: 'id'
 		  },
 		  admin_user_id: {
-		    columnName: 'admin_user_id',
-		    type: 'integer',
-		    foreignKey: true,
-		    references: 'admin_user',
-		    on: 'id'
+		    model: 'admin_user'		
 		  }
+
+		 // admin_role_id: {
+		 //   columnName: 'admin_role_id',
+		 //    type: 'integer',
+		 //    foreignKey: true,
+		 //    references: 'admin_role',
+		 //    on: 'id'
+		 //  },
+		 //  admin_user_id: {
+		 //    columnName: 'admin_user_id',
+		 //    type: 'integer',
+		 //    foreignKey: true,
+		 //    references: 'admin_user',
+		 //    on: 'id'
+		 //  }
 		
 	},
 	

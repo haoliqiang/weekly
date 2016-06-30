@@ -26,13 +26,12 @@ module.exports = Waterline.Collection.extend({
 			primaryKey: true,
 			unique: true
 		    },
-		
-		  roles: {
-		    collection: 'admin_user_role',
-		    references: 'admin_user_role',
-		    on: 'admin_role_id',
-		    via: 'admin_user_id'
-		  }
+		 users: {
+        collection: 'admin_user',
+        through: 'admin_user_role',
+        via: 'admin_role'
+      }
+		 
 		
 	},
 	

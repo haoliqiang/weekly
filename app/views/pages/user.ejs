@@ -19,11 +19,11 @@
 	<tbody >
 
 	<tr   ng-repeat="user in users">
-	<td class="col-md-2" ng-bind="user.admin_user_id[0].name"></td>
-	<td class="col-md-2" ng-bind="user.admin_user_id[0].password"></td>
-	<td class="col-md-2" ng-bind="user.admin_user_id[0].username"></td>
+	<td class="col-md-2" ng-bind="user.name"></td>
+	<td class="col-md-2" ng-bind="user.password"></td>
+	<td class="col-md-2" ng-bind="user.username"></td>
 	<td class="col-md-2"  ></td>
-	<td class="col-md-2" ng-bind="user. admin_role_id[0].role_name"></td>
+	<td class="col-md-2" ><span ng-repeat="role in user.user"><span class="col-md-1" ng-bind="role.role_name"></span></span></td>
 	<td class="col-md-2" ><button  class='btn btn-primary' ng-click="delete(user.id)">删除</button><button  class='btn btn-primary' ng-click="openUserDetail(user.id)">修改</button></td>
 	</tr> 
 
