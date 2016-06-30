@@ -1,7 +1,10 @@
 const     Waterline = require('waterline'),
                mysqlAdapter = require('sails-mysql'),
 	config =require('./config'),
-	Test = require('../app/models/users.server.model'),
+	users = require('../app/models/users.server.model'),
+	role = require('../app/models/role.server.model'),
+	userole = require('../app/models/user_role.server.model'),
+	
 	orm = new Waterline();
 	wlconfig = {
 		adapters: {
@@ -11,23 +14,16 @@ const     Waterline = require('waterline'),
 		connections:{
 		 	mysql:{
 		 		adapter:'mysql',
-		 		url : 'mysql://root:root@127.0.0.1/test'
+		 		url : config.mysql
 
 		 	}
 		 }
 	};
-orm.loadCollection(Test);
+orm.loadCollection(users);
+orm.loadCollection(role);
+orm.loadCollection(userole);
+
+
+
 exports.wlconfig =wlconfig;
 exports.orm = orm;
-
-
-// orm.initialize(config,function(err,models) {
-// 	if(err){
-// 		console.log('orm initialize failed. ', err);
-// 		return;
-// 	}
-// 	console.log('models,',models);
-// 	models.collections.user.create({username:'郝里强'},function(err,user) {
-//            console.log('after user.create, err ,user:',err, user)
-//         });
-// })

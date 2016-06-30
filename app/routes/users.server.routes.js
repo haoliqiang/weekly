@@ -2,6 +2,15 @@ var UsersController = require('../controllers/users.server.controller');
 
 module.exports = function(app){
 
+
+app.route('/')
+       .get( function(req,res, next) {
+
+       	res.render('pages/user',{
+ 		title : '用户管理'
+ 	})
+       });
+
 app.route('/list')
        .get( UsersController.find);
    

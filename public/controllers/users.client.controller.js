@@ -87,7 +87,7 @@ if(!$scope.user.name) {
  $scope.delete = function(id){
     UsersService.delete(id).then(
       function(data){
-        console.log(data);
+        
          $scope.loadNews();
       },
       function(err){}
@@ -104,6 +104,7 @@ if(!$scope.user.name) {
     UsersService.list().then(
       function(data){
         $scope.users = data;
+        console.log($scope.users);
       },
       function(err){}
     );

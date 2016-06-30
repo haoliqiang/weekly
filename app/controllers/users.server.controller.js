@@ -73,7 +73,7 @@ module.exports = {
 			return next(new Error('params error'));
 		}
 
-		req.models.users.create(req.body,function(err,doc) {
+		req.models.admin_user.create(req.body,function(err,doc) {
 			if(err) {
 				return next(err);
 			}
@@ -89,7 +89,7 @@ module.exports = {
 			return next(new Error('params error'));
 		}
 
-		req.models.users.update({id: req.body.id},req.body,function(err,doc) {
+		req.models.admin_user.update({id: req.body.id},req.body,function(err,doc) {
 			if(err) {
 				return next(err);
 			}
@@ -97,12 +97,12 @@ module.exports = {
 			});	
 	},
 	delete: function(req, res, next) {
-		console.log(1);
+		
 		if(!req.params.id){
 			return next(new Error('params error'));
 		}
 
-		req.models.users.destroy({id: req.params.id})
+		req.models.admin_user.destroy({id: req.params.id})
 			.exec(function(err, doc){
 				if(err) {
 					return next(err);
@@ -112,18 +112,37 @@ module.exports = {
 			});	
 	},
 	find: function(req, res, next) {
-
-		req.models.users.find()
-			.sort({ id: 'desc' })
+			req.models.admin_user_role.find()
+			.populate('admin_role_id')
+			.populate('admin_user_id')
 			.exec(function(err, doc){
 				if(err) {
 					return next(err);
 				}
-				//console.log(doc);
-				  return res.json(doc);
-		});
+				return res.json(doc);
+			});
+// 		req.models.admin_user.find().populate('role')
+// 			.sort({ id: 'desc' })
+// 			.exec(function(err, doc){
+// 				if(err) {
+// 					return next(err);
+// 				}
+// 				console.log(res.json(doc).models);
+// // 				req.models.admin_role.find({json(doc).role[0].admin_role_id}).exec(function(err, doc){
+// // 				if(err) {
+// // 					return next(err);
+// // 				}
+// // console.log(doc);
+// // 				});
+// 				//console.log(doc);
+// 				  //return res.json(doc);
+// 		});
 			
 	}
 	
 
 }
+
+
+
+

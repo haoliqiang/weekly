@@ -7,7 +7,7 @@ var waterline = require('../config/waterline');
 // 先进行 waterline 的初始化，再执行 express 实例的监听
 waterline.orm.initialize(waterline.wlconfig, function(err, models){
   if(err) {
-    conole.log('waterline initialize failed, err:', err);
+    console.log('waterline initialize failed, err:', err);
     return;
   }
   // 将 waterline 的数据集合附加到 express 实例中

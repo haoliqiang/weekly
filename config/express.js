@@ -3,7 +3,7 @@ var express = require('express'),
 	bodyParser = require('body-parser');
 
 module.exports = function() {
-	console.log('init expesss...');
+	
 	var  app = express();
 	app.use(express.static(path.join(__dirname,'../public')));
 	app.use(bodyParser.urlencoded({extended:false}));
@@ -12,11 +12,10 @@ module.exports = function() {
 	app.set('view engine','ejs');
 	app.use(function(req,res, next) {
 		req.models = app.get('models');
-
 		next();
 	});
 	require('../app/routes/users.server.routes')(app);
-
+console.log('init expesss...');
 
   // 处理所有未知的请求
   app.use(function(req, res, next){

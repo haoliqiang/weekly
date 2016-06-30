@@ -1,32 +1,21 @@
 var     Waterline = require('waterline');
 
-
 module.exports = Waterline.Collection.extend({
-	identity:'admin_user',
+	identity:'admin_role',
 	connection:'mysql',
-	schema:true,
 	migrate: 'safe',
 	autoCreatedAt: false,
 	autoUpdatedAt: false,
 	attributes:{
-		 
-		name:{
+		role_name:{
 			type:'string',
 			required:true
 		},
-		email:{
+		role_desc:{
 			type:'string',
 			required:true
 		},
-		username:{
-			type:'string',
-			required:true
-		},
-		password:{
-			type:'string',
-			required:true
-		},
-		is_enabled:{
+		is_system:{
 			type:'string',
 			required:true
 		}
@@ -37,12 +26,12 @@ module.exports = Waterline.Collection.extend({
 			primaryKey: true,
 			unique: true
 		    },
-		   
-		role: {
+		
+		  roles: {
 		    collection: 'admin_user_role',
 		    references: 'admin_user_role',
-		    on: 'admin_user_id',
-		    via: 'admin_role_id'
+		    on: 'admin_role_id',
+		    via: 'admin_user_id'
 		  }
 		
 	},

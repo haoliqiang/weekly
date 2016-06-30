@@ -22,6 +22,7 @@ function UsersService($http, $q) {
       defered.resolve(data);
     }).error(function(err){
       defered.reject(err);
+       console.log(err);
     });
 
     return defered.promise;
