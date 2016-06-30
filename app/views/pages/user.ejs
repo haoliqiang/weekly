@@ -50,10 +50,11 @@
 
          <form  class="form-horizontal"  style="width: 1000px;    padding-left: 20px;" >
 		<input name='id' class='xlarge' ng-bind='user.id ' style="display:none">
+		<input name='admin_user_id' class='xlarge' ng-bind='user.id ' style="display:none">
 			<div class="form-group ">
 			 <div class="input-group col-sm-4">
 			 <div class="input-group-addon">登录名</div>
-			<input name='login_name' class='form-control' ng-model='user.username ' >
+			<input name='username' class='form-control' ng-model='user.username ' >
 			</div></div>
 			<div class="form-group">
 			 <div class="input-group col-sm-4">
@@ -73,7 +74,7 @@
 			<div class="form-group" ng-repeat="role in user.roles">
 			 <div class="input-group col-sm-4">
 			 <div class="input-group-addon">职位</div>
-			<input name='job' class='form-control' ng-model='role.role_name '  >
+			<input name='role_name' class='form-control' ng-model='role.role_name '  >
 			</div></div>
 			
 			   <button class="btn btn-primary" ng-click="save()" ng-show='status'>保存</button>
