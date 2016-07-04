@@ -20,8 +20,8 @@ function UsersController($scope, UsersService){
     );
   };
    $scope.verify = function(){
-   if(!$scope.user.login_name) {
-      $scope.editorMessage = 'login_name is required';
+   if(!$scope.user.username) {
+      $scope.editorMessage = 'username is required';
       return;
     }
 
@@ -35,15 +35,15 @@ if(!$scope.user.name) {
       return;
     }
 
-    if(!$scope.user.team) {
-      $scope.editorMessage = 'team is required';
-      return;
-    }
+    // if(!$scope.user.team) {
+    //   $scope.editorMessage = 'team is required';
+    //   return;
+    // }
 
-    if(!$scope.user.job) {
-      $scope.editorMessage = 'job is required';
-      return;
-    }
+    // if(!$scope.user.job) {
+    //   $scope.editorMessage = 'job is required';
+    //   return;
+    // }
 
     $scope.editorMessage = '';
     };
