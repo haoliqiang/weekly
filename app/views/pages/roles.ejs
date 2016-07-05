@@ -5,23 +5,26 @@
 	<title><%= title %></title>
 	 <%- include ../include/head%>
 </head>
-<body ng-app="clientModule" ng-controller="UsersController">
+<body ng-app="clientModule" ng-controller="RolesController">
 	
 	<table class="table table-bordered" >
 	<thead>
 	<th class="col-md-2">职位</th>
+	<th class="col-md-2">职位描述</th>
+	<th class="col-md-2">操作</th>
 	</thead>
 	<tbody >
 
-	<tr   ng-repeat="user in users">
-	<td class="col-md-2" ng-bind="user.name"></td>
+	<tr   ng-repeat="role in roles">
+	<td class="col-md-2" ng-bind="role.role_name"></td>
+	<td class="col-md-2" ng-bind="role.role_desc"></td>
 	
-	<td class="col-md-2" ><button  class='btn btn-primary' ng-click="delete(user.id)">删除</button><button  class='btn btn-primary' ng-click="openUserDetail(user.id)">修改</button></td>
+	<td class="col-md-2" ><button  class='btn btn-primary' ng-click="delete(role.id)">删除</button><button  class='btn btn-primary' ng-click="openRoleDetail(role.id)">修改</button></td>
 	</tr> 
 
 	</tbody>
 	</table>
- 	<button  class='btn btn-primary' ng-click="createUser()">增加帐号</button>
+ 	<button  class='btn btn-primary' ng-click="createRole()">增加帐号</button>
 	
 
  <div class="modal" id="modal-editor">

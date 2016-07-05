@@ -1,10 +1,18 @@
 angular.module('clientModule')
-  .controller('UsersController', ['$scope', 'UsersService', UsersController]);
+  .controller('UsersController', ['$scope', 'UsersService', 'RolesService', UsersController]);
 
-function UsersController($scope, UsersService){
+function UsersController($scope, UsersService,RolesService){
   $scope.users = [];
   $scope.user = {};
   $scope.status =true;
+
+
+ $scope.selectRole = function(num,id){
+   console.log(num);
+  $scope.user.user_role[num].admin_role_id=id;
+  // $("#user_role ."+num+"").val(id);
+  //   console.log($("#user_role ."+num+"").val());
+  };
 
   $scope.save = function(){
     $scope.verify();
@@ -104,7 +112,14 @@ if(!$scope.user.name) {
     UsersService.list().then(
       function(data){
         $scope.users = data;
-        console.log($scope.users);
+        //console.log($scope.users);
+      },
+      function(err){}
+    );
+     RolesService.list().then(
+      function(data){
+        $scope.Aroles = data;
+        //console.log($scope.Aroles);
       },
       function(err){}
     );

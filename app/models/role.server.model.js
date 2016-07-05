@@ -9,6 +9,7 @@ module.exports = Waterline.Collection.extend({
 	attributes:{
 		role_name:{
 			type:'string',
+			 model: 'admin_user',
 			required:true
 		},
 		role_desc:{
@@ -31,7 +32,6 @@ module.exports = Waterline.Collection.extend({
         through: 'admin_user_role',
         via: 'admin_role'
       }
-		 
 		
 	},
 	

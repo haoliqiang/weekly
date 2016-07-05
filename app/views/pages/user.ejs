@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="clientModule" ng-controller="UsersController">
 <head>
 	<meta charset="UTF-8">
 	<title><%= title %></title>
 	 <%- include ../include/head%>
 </head>
-<body ng-app="clientModule" ng-controller="UsersController">
+<body >
 	
 	<table class="table table-bordered" >
 	<thead>
@@ -49,9 +49,9 @@
         <div class="modal-body">
 
          <form  class="form-horizontal"  style="width: 1000px;    padding-left: 20px;" >
-		<input name='id' class='xlarge' ng-model='user.id '  >
+		<input name='id' class='xlarge' ng-model='user.id '  style="display:none">
 		<!-- <input name='admin_user_id' class='xlarge' ng-bind='user.id ' style="display:none"> -->
-		
+			
 			<div class="form-group ">
 			 <div class="input-group col-sm-4">
 			 <div class="input-group-addon">登录名</div>
@@ -80,16 +80,26 @@
 			<div class="form-group" ng-repeat="team in user.teams">
 			 <div class="input-group col-sm-4">
 			 <div class="input-group-addon">团队</div>
-			<input name='id' class='xlarge' ng-model='team.id ' style="display:none">
 			<input name='team' class='form-control' ng-model='team.team_name '  >
 			</div></div>
-			<div class="form-group" ng-repeat="role in user.roles">
-			 <div class="input-group col-sm-4">
-			 <div class="input-group-addon">职位</div>
-			 <input name='id' class='xlarge' ng-model='role.id '>
-			<input name='role_name' class='form-control' ng-model='role.role_name '  >
-			</div></div>
 			
+			<div class="form-group" id="dropdown">
+			<div class="dropdown" ng-repeat="role in user.roles">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span  id="{{role.role_name}}">{{role.role_name}}</span>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li ng-repeat="Arole in Aroles"><a href="#" ng-bind="Arole.role_name" ng-click="selectRole(role.id,Arole.id)"></a></li>
+  </ul>
+</div>
+			<!-- <label   ng-repeat="role in user.roles">
+			<select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm" id="s0">
+
+			<option  ng-selected="role.role_name==Arole.role_name" value="{{Arole.id}}" ng-repeat="Arole in Aroles" ng-bind="Arole.role_name"  ng-click="selectRole(role.id,Arole.id)"></option>
+			</select>
+			</label> -->
+			</div>
 			   <button class="btn btn-primary" ng-click="save()" ng-show='status'>保存</button>
 			    <button class="btn btn-primary" ng-click="update()" ng-show='!status'>修改</button>
 			<button type='reset' class='btn'>取消</button>

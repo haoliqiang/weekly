@@ -14,7 +14,8 @@ module.exports = function() {
 		req.models = app.get('models');
 		next();
 	});
-	require('../app/routes/users.server.routes')(app);
+        require('../app/routes/users.server.routes')(app);
+	 require('../app/routes/roles.server.routes')(app);
 console.log('init expesss...');
 
   // 处理所有未知的请求

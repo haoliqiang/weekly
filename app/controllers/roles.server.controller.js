@@ -1,9 +1,9 @@
 var redisClient = require('../../config/redis');
 
-const REDIS_NEWS_PREFIX = 'user_';
+const REDIS_ROLES_PREFIX = 'role_';
 
 var getUsersFromRedis = function(id, cb){
-	  console.log('run getUsersFromRedis');
+	  console.log('run getRolesFromRedis');
 	  redisClient.get(REDIS_NEWS_PREFIX + id, function(err, v){
 	    if(err) return cb(err, null);
 	    if(!v) {
@@ -21,11 +21,8 @@ var getUsersFromRedis = function(id, cb){
 };
 
 var getUsersFromMysql = function(req, id, cb){
-	console.log('run getUsersFromMysql');
-	req.models.admin_user.findOne({id: id})
-	.populate('roles')
-	.populate('teams')
-	.populate('user_role')
+	console.log('run getRolesFromMysql');
+	req.models.admin_role.findOne({id: id})
 	.exec(function(err, doc){
 	if(doc) {
 	
@@ -95,8 +92,8 @@ module.exports = {
 		 || !req.body.name ){
 			return next(new Error('params error'));
 		}
-                               console.log("req.body"+JSON.stringify(req.body.roles));
-                            
+                               console.log("req.body"+JSON.stringify(req.body));
+                              
 		req.models.admin_user.update({id: req.body.id},
 			{username: req.body.username,
 			password:req.body.password,
@@ -110,44 +107,11 @@ module.exports = {
 				return next(err);
 			}
 			
-			//return res.json(doc);			
-			req.models.admin_user_role.destroy({admin_user_id: req.body.id})
-			.exec(function(err,doc) {
-				if(err) {
-					return next(err);
-				}
-                                   
-                                           	
-                                        
-				req.models.admin_user_role.create( req.body.user_role,function(err,doc) {
-					if(err) {
-						return next(err);
-					}
-					  return res.json(doc);
-			});
-
-			});	
-			
-				
-			// req.models.admin_user_team_like.destroy({admin_user_id: req.body.id})
-			// 		.exec(function(err,doc) {
-			// 			if(err) {
-			// 				return next(err);
-			// 			}
-    						
-			// 			req.models.admin_user_team_like.create({admin_user_id: req.body.id,admin_user_team_id: req.body.teams[i].id},function(err,doc) {
-			// 				if(err) {
-			// 					return next(err);
-			// 				}
-							
-			// });	
-			
-			// });
-		
+			//return res.json(doc);
 		
 
 
-
+ return res.json(doc);
 			});	
 	},
 	delete: function(req, res, next) {
@@ -166,10 +130,7 @@ module.exports = {
 			});	
 	},
 	find: function(req, res, next) {
-			req.models.admin_user.find()
-			.populate('roles')
-			.populate('teams')
-			.populate('user_role')
+			req.models.admin_role.find()
 			.exec(function(err, doc){
 				
 				if(err) {
