@@ -7,10 +7,19 @@ function UsersController($scope, UsersService,RolesService){
   $scope.status =true;
 
 
- $scope.selectRole = function(num,id){
-   console.log(num);
+ $scope.selectRole = function(roleID,roles,id){
+   
+   var num;
+   if(roles[0].id==roleID){
+num=0;
+   }else if(roles[1].id==roleID){
+num=1;
+   }else if(roles[2].id==roleID){
+num=2;
+   }
+console.log(num);
   $scope.user.user_role[num].admin_role_id=id;
-  // $("#user_role ."+num+"").val(id);
+  //$("#dropdown #"+num+"").val(id);
   //   console.log($("#user_role ."+num+"").val());
   };
 

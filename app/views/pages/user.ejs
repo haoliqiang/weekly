@@ -85,14 +85,14 @@
 			
 			<div class="form-group" id="dropdown">
 			<div class="dropdown" ng-repeat="role in user.roles">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <span  id="{{role.role_name}}">{{role.role_name}}</span>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li ng-repeat="Arole in Aroles"><a href="#" ng-bind="Arole.role_name" ng-click="selectRole(role.id,Arole.id)"></a></li>
-  </ul>
-</div>
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    <span  id="{{role.id}}">{{role.role_name}}</span>
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			    <li ng-repeat="Arole in Aroles"><a href="#" ng-bind="Arole.role_name" ng-click="selectRole(role.id,user.roles,Arole.id)"></a></li>
+			  </ul>
+			</div>
 			<!-- <label   ng-repeat="role in user.roles">
 			<select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm" id="s0">
 
